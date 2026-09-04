@@ -1,22 +1,11 @@
-import React from 'react'
-import Menu from '../assets/menu.png'
+import React from 'react';
 
-export default function Header(){
+export default function Header() {
     return (
-        <div className='flex justify-self-center
-        items-center
-        bg-slate-800 h-20
-        border-5
-        border-gray-400
-        rounded-2xl
-        w-full
-        '>
-            <button className='ml-4 cursor-pointer max-w-30'>
-                <img src={Menu} alt="menu" className='h-8 w-8'/>
-            </button>
-            <h1 className='text-2xl text-white 
-            font-italic w-full text-center
-            '>Gestor de Pessoas</h1>
-        </div>
-    )
+        <header className="w-full max-w-4xl">
+            <div className="flex items-center justify-between bg-slate-800 h-16 sm:h-20 border-2 border-slate-700 rounded-2xl px-4 sm:px-6">
+                <h1 className="text-xl sm:text-2xl font-italic text-white">Gestor de Pessoas</h1>
+            </div>
+        </header>
+    );
 }

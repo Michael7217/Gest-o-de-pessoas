@@ -1,16 +1,18 @@
 import React from 'react'
 
 interface Ibtn {
-        op: string
-    }
-export default function Btn({op}:Ibtn){
-    return(
-        <button className='border-4 border-green-300
-        rounded-2xl w-40 h-15 max-h-16
-        cursor-pointer bg-emerald-700
-        my-4'>
-            <h1 className='text-white
-            font-italic text-[20px]'>{op}</h1>
+    op: string;
+    func?: () => void;
+    className?: string;
+}
+
+export default function Btn({ op, func, className = '' }: Ibtn) {
+    return (
+        <button
+            className={`border-4 border-green-300 rounded-2xl w-full sm:w-auto h-14 sm:h-15 cursor-pointer bg-emerald-700 hover:bg-emerald-800 transition-colors font-semibold text-white text-lg ${className}`}
+            onClick={func}
+        >
+            {op}
         </button>
     )
 }

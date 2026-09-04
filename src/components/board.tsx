@@ -1,41 +1,59 @@
 import React, { useEffect, useState } from "react";
 import Pessoas from "./pessoas"
 import * as Services from '../services/metodos/metodos'
+
 interface Ipessoa {
     nome: string;
-    id: string
-}
-const services = {
-    'listar': Services.listar,
-    'criar': Services.criar,
-    'buscar' : {
-        'buscarpid': Services.buscarpid,
-        'buscarpnome': Services.buscarpnome
-    },
-    'atualizarpid': Services.atualizarpid,
-    'removerpid': Services.removerpid
+    id: string;
+    email?: string;
+    telefone?: string;
 }
 
-export default function Board() {
-    const [pessoas, setPessoas] = useState<Ipessoa[]>([])
+interface Iboard {
+    refresh: number;
+    filtro?: string;
+}
+
+export default function Board({ refresh, filtro }: Iboard) {
+    const [pessoas, setPessoas] = useState<Ipessoa[]>([]);
+
     useEffect(() => {
         const carregarpessoas = async () => {
-            const response = await services.listar()
-            setPessoas(response?.data ?? [])
-        }
-        carregarpessoas()
-    }, []) 
+            const response = await Services.listar(filtro);
+            setPessoas(response?.data ?? []);
+        };
+        carregarpessoas();
+    }, [refresh, filtro]);
 
     return (
-        <div className="flex flex-col
-        border-4 
-        border-gray-400 rounded-2xl
-        flex-1 min-h-0 w-full bg-slate-200">
-            {pessoas.map(pessoa => (
-                <Pessoas key={pessoa.id} id={pessoa.id} nome={pessoa.nome}/>
-            ))}
-            
-    
+        <div className="flex flex-col border-4 border-gray-400 rounded-2xl flex-1 min-h-0 w-full bg-slate-100 overflow-hidden">
+            <div className="p-4 border-b border-slate-300 bg-slate-50">
+                <h2 className="text-xl font-bold text-slate-800">Lista de Pessoas</h2>
+                <p className="text-sm text-slate-500 mt-1">{pessoas.length} pessoa(s) encontrada(s)</p>
+            </div>
+            <div className="flex-1 overflow-y-auto p-4">
+                {pessoas.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center h-full text-slate-500">
+                        <svg className="w-16 h-16 mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <p className="text-lg">Nenhuma pessoa cadastrada</p>
+                        <p className="text-sm mt-1">Clique em "Adicionar" para começar</p>
+                    </div>
+                ) : (
+                    <div className="space-y-2">
+                        {pessoas.map(pessoa => (
+                            <Pessoas
+                                key={pessoa.id}
+                                id={pessoa.id}
+                                nome={pessoa.nome}
+                                email={pessoa.email}
+                                telefone={pessoa.telefone}
+                            />
+                        ))}
+                    </div>
+                )}
+            </div>
         </div>
     )
 }

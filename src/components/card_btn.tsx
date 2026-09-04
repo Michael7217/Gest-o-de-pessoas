@@ -1,34 +1,18 @@
 import React from "react";
 import Btn from './button'
-// import {listar,
-//         criar,
-//         atualizarpid,
-//         buscarpid,
-//         buscarpnome,
-//         removerpid} from '../services/metodos/metodos.ts'
-// const mets = {
-//     listar: listar,
-//     criar: criar,
-//     atualizarpid: atualizarpid,
-//     buscarpid: buscarpid,
-//     buscarpnome: buscarpnome,
-//     removerpid: removerpid
-// }
 
-export default function Card_btn() {
-    enum btns {
-        adicionar = 'Adicionar',
-        remover = 'Remover',
-        atualizar = 'Atualizar',
-        listar = 'Listar'
+interface Icard_btn {
+    onAdicionar?: () => void;
+    onRemover?: () => void;
+    onAtualizar?: () => void;
+}
 
-    }
+export default function Card_btn({ onAdicionar, onRemover, onAtualizar }: Icard_btn) {
     return (
-        <div className="flex justify-around w-lvh gap-8 max-w-screen px-4">
-            <Btn op={btns.adicionar}/>
-            <Btn op={btns.remover}/>
-            <Btn op={btns.atualizar}/>
-            
+        <div className="flex flex-col sm:flex-row justify-center gap-4 w-full max-w-4xl px-4">
+            <Btn op="Adicionar" func={onAdicionar} className="flex-1 sm:w-auto" />
+            <Btn op="Remover" func={onRemover} className="flex-1 sm:w-auto" />
+            <Btn op="Atualizar" func={onAtualizar} className="flex-1 sm:w-auto" />
         </div>
     )
 }
