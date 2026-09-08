@@ -160,8 +160,5 @@ O projeto foi desenvolvido com o objetivo de aplicar conhecimentos de:
 
 🔗 GitHub: [Michael7217](https://github.com/Michael7217)
 
----
 
-## ⭐ Projeto
 
-Se este projeto foi útil ou interessante para você, considere deixar uma ⭐ no repositório!
