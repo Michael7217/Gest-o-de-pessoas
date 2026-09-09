@@ -50,13 +50,13 @@ export default function Home() {
             <div className="w-full max-w-4xl flex flex-col gap-4">
                 <div className="bg-white rounded-2xl border border-slate-300 p-4 sm:p-6 shadow-sm">
                     <h2 className="text-lg font-semibold text-slate-800 mb-4">Buscar por ID para Atualizar</h2>
-                    <div className="flex flex-col sm:flex-row gap-3">
+                    <div className="flex flex-col sm:gap-3">
                         <input
                             type="text"
                             value={buscaId}
                             onChange={(e) => { setBuscaId(e.target.value); setErroBusca(''); }}
                             placeholder="Digite o ID para buscar"
-                            className="flex-1 h-12 px-4 rounded-xl border border-slate-300 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 bg-slate-50"
+                            className="flex-1 h-12 min-h-12 px-4 rounded-xl border border-slate-300 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 bg-slate-50"
                         />
                         <Btn op="Buscar" func={handleAbrirAtualizar} className="w-full sm:w-auto" />
                     </div>
